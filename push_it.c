@@ -30,11 +30,12 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 		*stack = node;
 		(*stack)->prev = NULL;
 		(*stack)->next = NULL;
+		return;
 
 	}
 	searcher = *stack;
 
-	while (searcher)
+	while (searcher->next)
 		searcher = searcher->next;
 
 	searcher->next = node;
