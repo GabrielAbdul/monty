@@ -3,6 +3,7 @@
 #define NO_PINT ("L%d: can't pint, stack empty\n")
 #define NO_POP ("L%d: can't pop, an empty stack\n")
 #define NO_MALLOC ("Error: malloc failed\n")
+#define NO_SWAP ("L%d: cant swap, stack too short\n")
 
 /**
  * p_all - print all values on the stack
@@ -68,3 +69,35 @@ void p_int(stack_t **stack, unsigned int line_number)
 
  	*stack = node;
  }
+
+ /**
+  * swap_it - swaps the top two elemets of the stack
+  *
+  * @stack: fouble pointer to the head of a doubly linked list (the stack)
+  * @line_number: line number error
+  *
+  * Return: void
+  */
+void swap_it(stack_t **stack, unsigned int line_number)
+{
+	stack_t *node, *nother_node;
+	
+	int count = 0;
+
+
+	while (node)
+	{
+		node = node->next;
+		count++;
+	}
+
+	if (count < 1)
+		dprintf(STDERR_FILENO, NO_SWAP, line_number);
+
+	node = *stack;
+	nother_node = (*stack)->next;
+
+	*stack = nother_node;
+	(*stack)->next = node;
+	
+}
