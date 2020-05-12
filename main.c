@@ -27,21 +27,25 @@ int main(int argc, char *argv[])
 	  dprintf(STDERR_FILENO, FAILOPEN, argv[1]), exit(EXIT_FAILURE);
 	while (1)
 	{
-		printf("Before getline\n");
 		if (getline(&buff, &n, fd) == EOF)
 		{
-			printf("Somehow in getline");
 			return(EXIT_SUCCESS);
 		}
+		while(*buff == ' ')
+			buff++;
 		if (!strncmp(buff, "push", 4))
 			push_it(&head, linecount, buff + 4);
 		else
 		{
 			code = get_func(buff);
+			if (code.opcode == NULL)
+			{
+				printf("FAILURE\n");
+				exit(EXIT_FAILURE);
+			}
 			code.f(&head, linecount);
 		}
-		printf("linecount: %d, buff: %s", (int)linecount, buff);
-		printf("After getline\n");
+		/*printf("linecount: %d, buff: %s", (int)linecount, buff);*/
 		linecount++;
 	}
 	return (0);
@@ -60,12 +64,14 @@ instruction_t get_func(char *func)
 	instruction_t op[] = {
 		{"pall", p_all},
 		{"pint", p_int},
+		{"swap", swap_it},
+		{"pop", pop_it},
 		{NULL, NULL}
 	};
 
 	for (i = 0; op[i].opcode != NULL; i++)
 	{
-		if (!_strcmp(op[i].opcode, func))
+		if (!strncmp(op[i].opcode, func, 3))
 			return (op[i]);
 	}
 	return (op[i]);
