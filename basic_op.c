@@ -80,7 +80,7 @@ void p_int(stack_t **stack, unsigned int line_number)
   */
 void swap_it(stack_t **stack, unsigned int line_number)
 {
-	stack_t *node, *nother_node;
+	stack_t *node, *nother_node, *tmp;
 	int count = 0;
 
 	if (!stack || !*stack)
@@ -99,8 +99,13 @@ void swap_it(stack_t **stack, unsigned int line_number)
 		dprintf(STDERR_FILENO, NO_SWAP, line_number);
 		
 	*stack = nother_node;
+
+	tmp = (*stack)->next;
 	(*stack)->next = node;
-	
+	(*stack)->prev = NULL;
+	(*stack)->next->prev = *stack;
+	(*stack)->next->next = tmp;
+
 }
 
 /**
@@ -122,5 +127,4 @@ void add_top(stack_t **stack, unsigned int line_number)
 	(*stack)->next->next->prev = *stack;
 	(*stack)->next = (*stack)->next->next;
 
-	
 }
