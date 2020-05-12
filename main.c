@@ -11,20 +11,23 @@
  */
 int main(int argc, char *argv[])
 {
-	int fd, *n;
+	FILE *fd;
+	ssize_t n, linecount = 1;
 	char *buff;
 
 	if (argc != 2)
 		dprintf(STDERR_FILENO, USAGE), exit(EXIT_FAILURE);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), exit(EXIT_FAILURE);
+	fd = fopen(argv[1], "r");
+	if (fd == NULL)
+	  dprintf(STDERR_FILENO, FAILOPEN, argv[1]), exit(EXIT_FAILURE);
 	while (1)
 	{
+		printf("Before getline\n");
 		if (getline(&buff, &n, fd) == EOF)
 			exit(EXIT_SUCCESS);
-
-
+		printf("buff: %s\n", buff);
+		printf("After getline\n");
+		linecount++;
 	}
 }
 
