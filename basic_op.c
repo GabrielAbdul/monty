@@ -81,9 +81,13 @@ void p_int(stack_t **stack, unsigned int line_number)
 void swap_it(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node, *nother_node;
-	
 	int count = 0;
 
+	if (!stack || !*stack)
+		dprintf(STDERR_FILENO, NO_SWAP, line_number);
+
+	node = *stack;
+	nother_node = (*stack)->next;
 
 	while (node)
 	{
@@ -93,11 +97,30 @@ void swap_it(stack_t **stack, unsigned int line_number)
 
 	if (count < 1)
 		dprintf(STDERR_FILENO, NO_SWAP, line_number);
-
-	node = *stack;
-	nother_node = (*stack)->next;
-
+		
 	*stack = nother_node;
 	(*stack)->next = node;
+	
+}
+
+/**
+ * add_top - adds the top two elements of the stack
+ *
+ * @stack: double pointer to the head of the stack
+ * @line_number: line number for error codes
+ *
+ * Return: void
+ */
+void add_top(stack_t **stack, unsigned int line_number)
+{
+
+	if (!stack || !*stack)
+		dprintf(STDERR_FILENO, NO_ADD, line_number), exit(EXIT_FAILURE);
+
+	(*stack)->n += (*stack)->next->n;
+
+	(*stack)->next->next->prev = *stack;
+	(*stack)->next = (*stack)->next->next;
+
 	
 }
