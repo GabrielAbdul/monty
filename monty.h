@@ -46,4 +46,5 @@ void p_all(stack_t **stack, unsigned int line_number);
 void pop_it(stack_t **stack, unsigned int line_number);
 void swap_it(stack_t **stack, unsigned int line_number);
 void add_top(stack_t **stack, unsigned int line_number);
+void no_op(stack_T **stack, unsigned int line_number);
 #endif
