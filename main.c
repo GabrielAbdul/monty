@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <string.h>
 
 #define USAGE ("USAGE: monty file\n")
 #define FAILOPEN ("Error: Can't open file %s\n")
@@ -16,6 +17,8 @@ int main(int argc, char *argv[])
 	FILE *fd;
 	size_t n = 1, linecount = 1;
 	char *buff = malloc(1);
+	stack_t *head = NULL;
+	instruction_t code;
 
 	if (argc != 2)
 		dprintf(STDERR_FILENO, USAGE), exit(EXIT_FAILURE);
@@ -29,6 +32,13 @@ int main(int argc, char *argv[])
 		{
 			printf("Somehow in getline");
 			return(EXIT_SUCCESS);
+		}
+		if (!strncmp(buff, "push", 4))
+			push_it(&head, linecount, buff + 4);
+		else
+		{
+			code = get_func(buff);
+			code.f(&head, linecount);
 		}
 		printf("linecount: %d, buff: %s", (int)linecount, buff);
 		printf("After getline\n");
