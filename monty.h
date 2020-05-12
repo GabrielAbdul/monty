@@ -20,9 +20,9 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -35,20 +35,12 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 /*PROTOTYPES*/
 void push_it(stack_t **stack, unsigned int line_number, char *data);
 void p_int(stack_t **stack, unsigned int line_number);
 void p_all(stack_t **stack, unsigned int line_number);
-
-
-/*DEPENDANT STRUCTS*/
-instruction_t funcs[] = {
-	{"pall", p_all},
-	{"pint", p_int},
-	{NULL, NULL}
-};
 #endif
