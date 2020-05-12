@@ -2,6 +2,7 @@
 
 #define NO_PINT ("L%d: can't pint, stack empty\n")
 #define NO_POP ("L%d: can't pop, an empty stack\n")
+#define NO_MALLOC ("Error: malloc failed\n")
 
 /**
  * p_all - print all values on the stack
@@ -19,7 +20,7 @@ void p_all(stack_t **stack, unsigned int line_number)
 	(void)line_number;
  	if (!(stack) || (!(*stack)))
 	{
-		exit(EXIT_FAILURE);
+		dprintf(STDERR_FILENO, NO_MALLOC), exit(EXIT_FAILURE);
 	}
 
  	node = *stack;
