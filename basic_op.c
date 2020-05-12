@@ -95,18 +95,17 @@ void swap_it(stack_t **stack, unsigned int line_number)
 		node = node->next;
 		count++;
 	}
-
+	node = *stack;
 	if (count < 1)
 		dprintf(STDERR_FILENO, NO_SWAP, line_number);
-		
+
+	tmp = nother_node->next;
+	nother_node->next = node;
+	nother_node->prev = NULL;
+	node->prev = nother_node;
+	node->next = tmp;
+	tmp->prev = node;
 	*stack = nother_node;
-
-	tmp = (*stack)->next;
-	(*stack)->next = node;
-	(*stack)->prev = NULL;
-	(*stack)->next->prev = *stack;
-	(*stack)->next->next = tmp;
-
 }
 
 /**
