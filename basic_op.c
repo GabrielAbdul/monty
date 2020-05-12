@@ -1,7 +1,7 @@
 #include "monty.h"
 
 #define NO_PINT ("L%d: can't pint, stack empty\n")
-#define NO_POP ("L%d: can't pint, stack empty\n")
+#define NO_POP ("L%d: can't pop, an empty stack\n")
 
 /**
  * p_all - print all values on the stack
