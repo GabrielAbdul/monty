@@ -20,8 +20,7 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 	if ((!*stack) || (!stack) || (!node) || (!data))
 		dprintf(STDERR_FILENO, USAGE_INT, line_number), exit(EXIT_FAILURE);
 
-	
-	searcher = *stack
+	searcher = *stack;
 
 	while (searcher)
 		searcher = searcher->next;

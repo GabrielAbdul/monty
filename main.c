@@ -2,6 +2,8 @@
 
 #define USAGE ("USAGE: monty file\n")
 #define FAILOPEN ("Error: Can't open file %s\n")
+int _strcmp(char *s1, char *s2);
+instruction_t get_func(char *func);
 /**
  * main - Entrypoint for the monty interpreter function
  * @argc: argument count
@@ -12,8 +14,8 @@
 int main(int argc, char *argv[])
 {
 	FILE *fd;
-	ssize_t n, linecount = 1;
-	char *buff;
+	size_t n = 1, linecount = 1;
+	char *buff = malloc(1);
 
 	if (argc != 2)
 		dprintf(STDERR_FILENO, USAGE), exit(EXIT_FAILURE);
@@ -24,11 +26,15 @@ int main(int argc, char *argv[])
 	{
 		printf("Before getline\n");
 		if (getline(&buff, &n, fd) == EOF)
-			exit(EXIT_SUCCESS);
-		printf("buff: %s\n", buff);
+		{
+			printf("Somehow in getline");
+			return(EXIT_SUCCESS);
+		}
+		printf("linecount: %d, buff: %s", (int)linecount, buff);
 		printf("After getline\n");
 		linecount++;
 	}
+	return (0);
 }
 
 /**
@@ -41,11 +47,18 @@ instruction_t get_func(char *func)
 {
 	int i;
 
-	for (i = 0; funcs[i].opcode != NULL; i++)
+	instruction_t op[] = {
+		{"pall", p_all},
+		{"pint", p_int},
+		{NULL, NULL}
+	};
+
+	for (i = 0; op[i].opcode != NULL; i++)
 	{
-		if (!_strcmp(funcs[i].opcode, func))
-			return (funcs[i]);
+		if (!_strcmp(op[i].opcode, func))
+			return (op[i]);
 	}
+	return (op[i]);
 }
 /**
  * _strcmp - compares two strings

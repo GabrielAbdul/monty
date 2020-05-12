@@ -11,27 +11,28 @@
  * Return: void
  */
 
- void p_all(stack_t **stack, unsigned int line_number)
- {
+void p_all(stack_t **stack, unsigned int line_number)
+{
  	stack_t *node;
 
- 	if ((!*stack) || (!(**stack))
- 	{
- 		exit(EXIT_FAILURE);
- 	}
+	(void)line_number;
+ 	if (!(stack) || (!(*stack)))
+	{
+		exit(EXIT_FAILURE);
+	}
 
  	node = *stack;
 
  	for(; node; node = node->next)
  		printf("%d\n", node->n);
- 		
+
 }
 
 void p_int(stack_t **stack, unsigned int line_number)
 {
+	(void)line_number;
 	if (!*stack || !stack)
 		dprintf(STDERR_FILENO, NO_PINT);
 
 	printf("%d\n", (*stack)->n);
-	
 }
