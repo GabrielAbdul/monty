@@ -1,12 +1,14 @@
 #ifndef MONTY_H
 #define MONTY_H
+
+/*INCLUDES GO HERE*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
+/*MANDATORY STRUCTS*/
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -36,4 +38,17 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/*PROTOTYPES*/
+void push_it(stack_t **stack, unsigned int line_number, char *data);
+void p_int(stack_t **stack, unsigned int line_number);
+void p_all(stack_t **stack, unsigned int line_number);
+
+
+/*DEPENDANT STRUCTS*/
+instruction_t funcs[] = {
+	{"pall", p_all},
+	{"pint", p_int},
+	{NULL, NULL}
+};
 #endif
