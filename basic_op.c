@@ -4,6 +4,7 @@
 #define NO_POP ("L%d: can't pop, an empty stack\n")
 #define NO_MALLOC ("Error: malloc failed\n")
 #define NO_SWAP ("L%d: cant swap, stack too short\n")
+#define NO_ADD (":L%d: can't add, stack too short\n")
 
 /**
  * p_all - print all values on the stack
