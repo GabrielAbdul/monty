@@ -1,32 +1,37 @@
 #include "monty.h"
 
-#define USAGE ("L<line_+number>: usage: push integer")
+#define NO_PINT ("L<line_number>: can't pint, stack empty\n")
+
 /**
- * push_it - pushes an element to the syack
+ * p_all - print all values on the stack
  *
- * @stack: double pointer to head node of doubly linked list (the stack)
- * @line_number: 
+ * @stack: double pointer to the head of a doubly linked list (the stack)
+ * @line_number: unused
  *
- * Return: Void
+ * Return: void
  */
 
- 
-void push_it(stack_t **stack, int data)
+ void p_all(stack_t **stack, unsigned int line_number)
+ {
+ 	stack_t *node;
+
+ 	if ((!*stack) || (!(**stack))
+ 	{
+ 		exit(EXIT_FAILURE);
+ 	}
+
+ 	node = *stack;
+
+ 	for(; node; node = node->next)
+ 		printf("%d\n", node->n);
+ 		
+}
+
+void p_int(stack_t **stack, unsigned int line_number)
 {
-	stack_t *node = malloc(sizeof(stack_t));
-	stack_t *searcher;
+	if (!*stack || !stack)
+		dprintf(STDERR_FILENO, NO_PINT);
 
-	if ((!*stack) || (!stack) || (!node))
-		dprintf(STDERR_FILENO, USAGE), exit(EXIT_FAILURE);
-
-	searcher = *stack
-
-	while (searcher)
-		searcher = searcher->next;
-
-	searcher->next = node;
-	node->prev = searcher;
-	node->next = NULL;
-	node->n = data;
-
+	printf("%d\n", (*stack)->n);
+	
 }
