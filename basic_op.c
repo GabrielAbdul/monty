@@ -4,7 +4,6 @@
 #define NO_POP ("L%d: can't pop, an empty stack\n")
 #define NO_MALLOC ("Error: malloc failed\n")
 #define NO_SWAP ("L%d: cant swap, stack too short\n")
-#define NO_ADD (":L%d: can't add, stack too short\n")
 
 /**
  * p_all - print all values on the stack
@@ -118,9 +117,8 @@ void swap_it(stack_t **stack, unsigned int line_number)
  * Return: void
  */
  
-void no_op(stack_t **stack, unsigned int line_number)
+void no_op(__attribute__ ((unused)) stack_t **stack, unsigned int line_number)
 {
-	(unused)line_number;
-	(unused)stack;
+	(void)line_number;
 	return;
 }
