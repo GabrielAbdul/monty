@@ -66,7 +66,7 @@ void p_int(stack_t **stack, unsigned int line_number)
 
  	(*stack)->next = NULL;
  	(*stack)->prev = NULL;
-
+	free(*stack);
  	*stack = node;
  }
 
