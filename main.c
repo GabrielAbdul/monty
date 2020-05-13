@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 		while(*buff == ' ')
 			buff++;
 		if (!strncmp(buff, "push", 4))
-			push_it(&head, linecount, buff + 4);
+			push_it(&head, linecount, buff + 5);
 		else
 		{
 			code = get_func(buff);
@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
 				printf("FAILURE\n");
 				exit(EXIT_FAILURE);
 			}
+			printf("\nOpcode: %s\n", code.opcode);
 			code.f(&head, linecount);
 		}
 		/*printf("linecount: %d, buff: %s", (int)linecount, buff);*/
@@ -66,6 +67,7 @@ instruction_t get_func(char *func)
 		{"pint", p_int},
 		{"swap", swap_it},
 		{"pop", pop_it},
+		{"add", add_top},
 		{NULL, NULL}
 	};
 
