@@ -4,7 +4,6 @@
 #define NO_POP ("L%d: can't pop, an empty stack\n")
 #define NO_MALLOC ("Error: malloc failed\n")
 #define NO_SWAP ("L%d: cant swap, stack too short\n")
-#define NO_ADD (":L%d: can't add, stack too short\n")
 
 /**
  * p_all - print all values on the stack
@@ -109,22 +108,16 @@ void swap_it(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * add_top - adds the top two elements of the stack
+ * no_op - Does nothing
  *
- * @stack: double pointer to the head of the stack
- * @line_number: line number for error codes
+ * @stack: unused
+ * @line_number: unused
  *
  * Return: void
  */
-void add_top(stack_t **stack, unsigned int line_number)
+ 
+void no_op(__attribute__ ((unused)) stack_t **stack, unsigned int line_number)
 {
-
-	if (!stack || !*stack)
-		dprintf(STDERR_FILENO, NO_ADD, line_number), exit(EXIT_FAILURE);
-
-	(*stack)->n += (*stack)->next->n;
-
-	(*stack)->next->next->prev = *stack;
-	(*stack)->next = (*stack)->next->next;
-
+	(void)line_number;
+	return;
 }
