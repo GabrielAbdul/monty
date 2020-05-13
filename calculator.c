@@ -34,7 +34,7 @@ void add_top(stack_t **stack, unsigned int line_number)
 	if (count < 1)
 		dprintf(STDERR_FILENO, NO_ADD, line_number), exit(EXIT_FAILURE);
 
-	(*stack)->n += (*stack)->next->n;
+	(*stack)->next->n += (*stack)->n;
 
 	*stack = (*stack)->next;
 	free((*stack)->prev);
