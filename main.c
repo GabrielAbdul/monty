@@ -68,12 +68,17 @@ instruction_t get_func(char *func)
 		{"swap", swap_it},
 		{"pop", pop_it},
 		{"add", add_top},
+		{"sub", sub_top},
+		{"div", div_top},
+		{"mul", mul_top},
+		{"nop", no_op},
+		{"#", no_op},
 		{NULL, NULL}
 	};
 
 	for (i = 0; op[i].opcode != NULL; i++)
 	{
-		if (!strncmp(op[i].opcode, func, 3))
+		if (!strncmp(op[i].opcode, func, strlen(op[i].opcode) - 1))
 			return (op[i]);
 	}
 	return (op[i]);

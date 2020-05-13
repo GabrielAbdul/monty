@@ -15,7 +15,7 @@
 void push_it(stack_t **stack, unsigned int line_number, char *data)
 {
 	stack_t *node = malloc(sizeof(stack_t));
-	stack_t *searcher;
+/*	stack_t *searcher;*/
 	int num, flag = 0, i;
 
 	if (!stack || !data)
