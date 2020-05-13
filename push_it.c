@@ -15,7 +15,6 @@
 void push_it(stack_t **stack, unsigned int line_number, char *data)
 {
 	stack_t *node = malloc(sizeof(stack_t));
-	stack_t *searcher;
 
 	if (!stack || !data)
 		dprintf(STDERR_FILENO, USAGE_INT, line_number), exit(EXIT_FAILURE);
@@ -31,15 +30,10 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 		(*stack)->prev = NULL;
 		(*stack)->next = NULL;
 		return;
-
 	}
-	searcher = *stack;
 
-	while (searcher->next)
-		searcher = searcher->next;
-
-	searcher->next = node;
-	node->prev = searcher;
-	node->next = NULL;
-
+	(*stack)->prev = node;
+	node->next = *stack;
+	node->prev = NULL;
+	*stack = node;
 }

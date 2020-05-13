@@ -36,9 +36,10 @@ void add_top(stack_t **stack, unsigned int line_number)
 
 	(*stack)->n += (*stack)->next->n;
 
-	(*stack)->next->next->prev = *stack;
-	(*stack)->next = (*stack)->next->next;
-
+	*stack = (*stack)->next;
+	free((*stack)->prev);
+	(*stack)->prev = NULL;
+	
 }
 /**
  * sub_top - subs the top two elements of the stack
@@ -71,8 +72,9 @@ void sub_top(stack_t **stack, unsigned int line_number)
 
 	(*stack)->next->n -= (*stack)->n;
 
-	(*stack)->next->prev = NULL;
-	(*stack)->next = NULL;
+	*stack = (*stack)->next;
+	free((*stack)->prev);
+	(*stack)->prev = NULL;
 	
 }
 
@@ -107,8 +109,9 @@ void div_top(stack_t **stack, unsigned int line_number)
 
 	(*stack)->next->n /= (*stack)->n;
 
-	(*stack)->next->prev = NULL;
-	(*stack)->next = NULL;
+	*stack = (*stack)->next;
+	free((*stack)->prev);
+	(*stack)->prev = NULL;
 }
 
 /**
@@ -142,6 +145,7 @@ void mul_top(stack_t **stack, unsigned int line_number)
 
 	(*stack)->next->n *= (*stack)->n;
 
-	(*stack)->next->prev = NULL;
-	(*stack)->next = NULL;
+	*stack = (*stack)->next;
+	free((*stack)->prev);
+	(*stack)->prev = NULL;
 }
