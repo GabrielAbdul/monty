@@ -5,6 +5,7 @@
 #define FAILOPEN ("Error: Can't open file %s\n")
 int _strcmp(char *s1, char *s2);
 instruction_t get_func(char *func);
+void free_stack(stack_t *stack);
 /**
  * main - Entrypoint for the monty interpreter function
  * @argc: argument count
@@ -29,7 +30,7 @@ int main(int argc, char *argv[])
 	{
 		if (getline(&buff, &n, fd) == EOF)
 		{
-			return(EXIT_SUCCESS);
+			break;
 		}
 		while(*buff == ' ')
 			buff++;
@@ -49,7 +50,10 @@ int main(int argc, char *argv[])
 		/*printf("linecount: %d, buff: %s", (int)linecount, buff);*/
 		linecount++;
 	}
-	return (0);
+	free_stack(head);
+	free(buff);
+	fclose(fd);
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -68,31 +72,35 @@ instruction_t get_func(char *func)
 		{"swap", swap_it},
 		{"pop", pop_it},
 		{"add", add_top},
+		{"sub", sub_top},
+		{"div", div_top},
+		{"mul", mul_top},
+		{"nop", no_op},
+		{"#", no_op},
 		{NULL, NULL}
 	};
 
 	for (i = 0; op[i].opcode != NULL; i++)
 	{
-		if (!strncmp(op[i].opcode, func, 3))
+		if (!strncmp(op[i].opcode, func, strlen(op[i].opcode) - 1))
 			return (op[i]);
 	}
 	return (op[i]);
 }
 /**
- * _strcmp - compares two strings
- *@s1: string 1 to be compared
- *@s2: string 2 to be compared
- * Return: a positive, negative, or 0 number based on the first different char
+ * free_stack - frees a stack
+ * @stack: stack to be freed
+ *
+ * Return: void
  */
-int _strcmp(char *s1, char *s2)
+void free_stack(stack_t *stack)
 {
-	while ((*s1 != '\0' && *s2 != '\0') && *s1 == *s2)
+	stack_t *tmp;
+
+	while (stack != NULL)
 	{
-		s1++;
-		s2++;
+		tmp = stack;
+		stack = stack->next;
+		free(tmp);
 	}
-	if (*s1 == *s2)
-		return (0);
-	else
-		return (*s1 - *s2);
 }
