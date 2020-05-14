@@ -96,6 +96,7 @@ instruction_t get_func(char *func)
 		{"#", no_op},
 		{"pchar", p_char},
 		{"rotl", rotl},
+		{"rotr", rotr},
 		{NULL, NULL}
 	};
 
