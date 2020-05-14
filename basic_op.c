@@ -70,7 +70,7 @@ void pop_it(stack_t **stack, unsigned int line_number)
 	*stack = node;
 }
 
- /**
+/**
   * swap_it - swaps the top two elemets of the stack
   *
   * @stack: double pointer to the head of a doubly linked list (the stack)

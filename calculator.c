@@ -1,10 +1,10 @@
 #include "monty.h"
 
 #define NO_ADD (":L%d: can't add, stack too short\n")
-#define NO_SUB (":%d: can't sub, stack too short\n")
-#define NO_DIV (":%d: can't div, stack too short\n")
-#define NO_MUL (":%d: can't mul, stack too short\n")
-#define NO_MOD (":%d: can't mod, stack too short\n")
+#define NO_SUB ("L:%d: can't sub, stack too short\n")
+#define NO_DIV ("L:%d: can't div, stack too short\n")
+#define NO_MUL ("L:%d: can't mul, stack too short\n")
+#define NO_MOD ("L:%d: can't mod, stack too short\n")
 
 /**
  * add_top - adds the top two elements of the stack
@@ -55,7 +55,7 @@ void sub_top(stack_t **stack, unsigned int line_number)
 	int count = 0;
 
 	if (!stack || !*stack)
-		dprintf(STDERR_FILENO, NO_SUB, line_number);
+		dprintf(STDERR_FILENO, NO_SUB, line_number), exit(EXIT_FAILURE);
 
 
 	node = *stack;
@@ -91,7 +91,7 @@ void div_top(stack_t **stack, unsigned int line_number)
 	int count = 0;
 
 	if (!stack || !*stack)
-		dprintf(STDERR_FILENO, NO_DIV, line_number);
+		dprintf(STDERR_FILENO, NO_DIV, line_number), exit(EXIT_FAILURE);
 
 
 	node = *stack;
@@ -127,7 +127,7 @@ void mul_top(stack_t **stack, unsigned int line_number)
 	int count = 0;
 
 	if (!stack || !*stack)
-		dprintf(STDERR_FILENO, NO_MUL, line_number);
+		dprintf(STDERR_FILENO, NO_MUL, line_number), exit(EXIT_FAILURE);
 
 
 	node = *stack;
@@ -143,6 +143,43 @@ void mul_top(stack_t **stack, unsigned int line_number)
 
 	(*stack)->next->n *= (*stack)->n;
 
+	*stack = (*stack)->next;
+	free((*stack)->prev);
+	(*stack)->prev = NULL;
+}
+
+
+/**
+ * mod_top - Mods top element with second element of stack
+ *
+ * @stack: double pointer to head of the stack
+ * @line_number: line number to output for errors
+ *
+ * Return: void
+ */
+void mod_top(stack_t **stack, unsigned int line_number)
+{
+	stack_t *node;
+	int count = 0;
+
+	if (!stack || !*stack)
+		dprintf(STDERR_FILENO, NO_MUL, line_number), exit(EXIT_FAILURE);
+
+	if ((*stack)->n == 0)
+		dprintf(STDERR_FILENO, DIV_0, line_number), exit(EXIT_FAILURE);
+
+	node = *stack;
+
+	while (node)
+	{
+		node = node->next;
+		count++;
+	}
+
+	if (count < 1)
+		dprintf(STDERR_FILENO, NO_MOD, line_number), exit(EXIT_FAILURE);
+
+	(*stack)->next->n %= (*stack)->n;
 	*stack = (*stack)->next;
 	free((*stack)->prev);
 	(*stack)->prev = NULL;
