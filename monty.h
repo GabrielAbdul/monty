@@ -56,4 +56,5 @@ void mod_top(stack_t **stack, unsigned int line_number);
 void p_char(stack_t **stack, unsigned int line_number);
 void no_op(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t *stack);
+void rotl(stack_t **stack, unsigned int line_number);
 #endif
