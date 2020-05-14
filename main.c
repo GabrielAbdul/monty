@@ -4,6 +4,7 @@
 #define USAGE ("USAGE: monty file\n")
 #define FAILOPEN ("Error: Can't open file %s\n")
 #define NOMEM ("Error: malloc failed\n")
+#define UNKNOWN ("L%d: unknown instruction %s")
 int _strcmp(char *s1, char *s2);
 instruction_t get_func(char *func);
 /**
@@ -47,6 +48,8 @@ int main(int argc, char *argv[])
 				code = get_func(buff + i);
 				if (code.opcode == NULL)
 				{
+					dprintf(STDERR_FILENO, UNKNOWN,
+						(int)linecount, buff + i);
 					flag = -1;
 					break;
 				}
