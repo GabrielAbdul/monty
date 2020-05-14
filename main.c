@@ -41,7 +41,8 @@ int main(int argc, char *argv[])
 			i++;
 		if (*(buff + i) != '\n' && *(buff + i) && strlen(buff) >= 4)
 		{
-			if (!strncmp(buff + i, "push ", 5))
+			if (!strncmp(buff + i, "push", 4) && (!strncmp(buff + i,
+				"push", 5) || !strncmp(buff + i, "push ", 5)))
 				push_it(&head, linecount, buff + 5 + i);
 			else
 			{
