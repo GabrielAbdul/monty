@@ -3,6 +3,7 @@
 
 #define USAGE ("USAGE: monty file\n")
 #define FAILOPEN ("Error: Can't open file %s\n")
+#define NOMEM ("Error: malloc failed\n")
 int _strcmp(char *s1, char *s2);
 instruction_t get_func(char *func);
 void free_stack(stack_t *stack);
@@ -16,44 +17,55 @@ void free_stack(stack_t *stack);
 int main(int argc, char *argv[])
 {
 	FILE *fd;
-	size_t n = 1, linecount = 1;
-	char *buff = malloc(1);
+	size_t n = 0, linecount = 1, i = 0;
+	char *buff = NULL;
 	stack_t *head = NULL;
 	instruction_t code;
+	int flag = 0;
 
 	if (argc != 2)
 		dprintf(STDERR_FILENO, USAGE), exit(EXIT_FAILURE);
 	fd = fopen(argv[1], "r");
 	if (fd == NULL)
-	  dprintf(STDERR_FILENO, FAILOPEN, argv[1]), exit(EXIT_FAILURE);
-	while (1)
+		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), exit(EXIT_FAILURE);
+	while (getline(&buff, &n, fd) != EOF)
 	{
-		if (getline(&buff, &n, fd) == EOF)
+		if (!buff)
 		{
+			dprintf(STDERR_FILENO, NOMEM);
 			break;
 		}
-		while(*buff == ' ')
-			buff++;
-		if (!strncmp(buff, "push", 4))
-			push_it(&head, linecount, buff + 5);
-		else
+		while (buff[i] == ' ')
+			i++;
+		if (*(buff + i) != '\n' && *(buff + i) && strlen(buff) >= 4)
 		{
-			code = get_func(buff);
-			if (code.opcode == NULL)
+			if (!strncmp(buff, "push", 4))
+				push_it(&head, linecount, buff + 5);
+			else
 			{
-				printf("FAILURE\n");
-				exit(EXIT_FAILURE);
+				code = get_func(buff);
+				if (code.opcode == NULL)
+				{
+					flag = -1;
+					break;
+				}
+				code.f(&head, linecount);
 			}
-			printf("\nOpcode: %s\n", code.opcode);
-			code.f(&head, linecount);
 		}
 		/*printf("linecount: %d, buff: %s", (int)linecount, buff);*/
 		linecount++;
+		i = 0;
+		free(buff);
+		buff = NULL;
 	}
 	free_stack(head);
-	free(buff);
+	if (buff)
+		free(buff);
 	fclose(fd);
-	return (EXIT_SUCCESS);
+	if (flag == -1)
+		return (EXIT_FAILURE);
+	else
+		return (EXIT_SUCCESS);
 }
 
 /**
