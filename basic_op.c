@@ -20,7 +20,8 @@ void p_all(stack_t **stack, unsigned int line_number)
 
 	(void)line_number;
 	if (!(stack) || (!(*stack)))
-		dprintf(STDERR_FILENO, NO_MALLOC);
+		return;
+		/*dprintf(STDERR_FILENO, NO_MALLOC);*/
 
 	node = *stack;
 
