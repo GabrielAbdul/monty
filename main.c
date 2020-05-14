@@ -25,6 +25,8 @@ int main(int argc, char *argv[])
 
 	if (argc != 2)
 		dprintf(STDERR_FILENO, USAGE), exit(EXIT_FAILURE);
+	if (access(argv[1], R_OK) < 0)
+		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), exit(EXIT_FAILURE);
 	fd = fopen(argv[1], "r");
 	if (fd == NULL)
 		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), exit(EXIT_FAILURE);
