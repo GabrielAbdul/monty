@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), exit(EXIT_FAILURE);
 	fd = fopen(argv[1], "r");
 	if (fd == NULL)
-		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), exit(EXIT_FAILURE);
+		dprintf(STDERR_FILENO, NOMEM), exit(EXIT_FAILURE);
 	while (getline(&buff, &n, fd) != EOF)
 	{
 		if (!buff)
