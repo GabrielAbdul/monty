@@ -16,18 +16,18 @@
 
 void p_all(stack_t **stack, unsigned int line_number)
 {
- 	stack_t *node;
+	stack_t *node;
 
 	(void)line_number;
- 	if (!(stack) || (!(*stack)))
+	if (!(stack) || (!(*stack)))
 	{
 		dprintf(STDERR_FILENO, NO_MALLOC), exit(EXIT_FAILURE);
 	}
 
- 	node = *stack;
+	node = *stack;
 
- 	for(; node; node = node->next)
- 		printf("%d\n", node->n);
+	for (; node; node = node->next)
+		printf("%d\n", node->n);
 
 }
 /**
@@ -55,25 +55,25 @@ void p_int(stack_t **stack, unsigned int line_number)
  * Return: void
  */
 
- void pop_it(stack_t **stack, unsigned int line_number)
- {
- 	stack_t *node;
+void pop_it(stack_t **stack, unsigned int line_number)
+{
+	stack_t *node;
 
- 	if (!stack || (!*stack))
- 		dprintf(STDERR_FILENO, NO_POP, line_number);
+	if (!stack || (!*stack))
+		dprintf(STDERR_FILENO, NO_POP, line_number);
 
- 	node = (*stack)->next;
+	node = (*stack)->next;
 
- 	(*stack)->next = NULL;
- 	(*stack)->prev = NULL;
+	(*stack)->next = NULL;
+	(*stack)->prev = NULL;
 	free(*stack);
- 	*stack = node;
- }
+	*stack = node;
+}
 
  /**
   * swap_it - swaps the top two elemets of the stack
   *
-  * @stack: fouble pointer to the head of a doubly linked list (the stack)
+  * @stack: double pointer to the head of a doubly linked list (the stack)
   * @line_number: line number error
   *
   * Return: void
@@ -115,9 +115,7 @@ void swap_it(stack_t **stack, unsigned int line_number)
  *
  * Return: void
  */
- 
 void no_op(__attribute__ ((unused)) stack_t **stack, unsigned int line_number)
 {
 	(void)line_number;
-	return;
 }

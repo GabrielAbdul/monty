@@ -39,7 +39,6 @@ void add_top(stack_t **stack, unsigned int line_number)
 	*stack = (*stack)->next;
 	free((*stack)->prev);
 	(*stack)->prev = NULL;
-	
 }
 /**
  * sub_top - subs the top two elements of the stack
@@ -75,11 +74,10 @@ void sub_top(stack_t **stack, unsigned int line_number)
 	*stack = (*stack)->next;
 	free((*stack)->prev);
 	(*stack)->prev = NULL;
-	
 }
 
 /**
- * add_top - adds the top two elements of the stack
+ * div_top - adds the top two elements of the stack
  *
  * @stack: double pointer to the head of the stack
  * @line_number: line number for error codes
