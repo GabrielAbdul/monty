@@ -6,7 +6,6 @@
 #define NOMEM ("Error: malloc failed\n")
 int _strcmp(char *s1, char *s2);
 instruction_t get_func(char *func);
-void free_stack(stack_t *stack);
 /**
  * main - Entrypoint for the monty interpreter function
  * @argc: argument count
