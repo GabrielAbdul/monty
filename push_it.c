@@ -22,7 +22,7 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 	char *buff;
 
 	if (!stack || !data || data[0] == '\0')
-		dprintf(STDERR_FILENO, U_INT, line_number),	exit(EXIT_FAILURE);
+		dprintf(STDERR_FILENO, U_INT, line_number), exit(EXIT_FAILURE);
 	buff = malloc(strlen(data) + 1);
 	for (i = 0; i < (int)strlen(data) + 1; i++)
 		buff[i] = '\0';
