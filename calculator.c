@@ -5,6 +5,7 @@
 #define NO_DIV ("L:%d: can't div, stack too short\n")
 #define NO_MUL ("L:%d: can't mul, stack too short\n")
 #define NO_MOD ("L:%d: can't mod, stack too short\n")
+#define DIV_0 ("L:%d division by zero\n")
 
 /**
  * add_top - adds the top two elements of the stack
@@ -163,7 +164,7 @@ void mod_top(stack_t **stack, unsigned int line_number)
 	int count = 0;
 
 	if (!stack || !*stack)
-		dprintf(STDERR_FILENO, NO_MUL, line_number), exit(EXIT_FAILURE);
+		dprintf(STDERR_FILENO, NO_MOD, line_number), exit(EXIT_FAILURE);
 
 	if ((*stack)->n == 0)
 		dprintf(STDERR_FILENO, DIV_0, line_number), exit(EXIT_FAILURE);
