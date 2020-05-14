@@ -17,7 +17,6 @@
 void push_it(stack_t **stack, unsigned int line_number, char *data)
 {
 	stack_t *node = malloc(sizeof(stack_t));
-/*	stack_t *searcher;*/
 	int num, flag = 0, i, j;
 	char *buff;
 
@@ -34,19 +33,14 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 		if (!(data[i] >= '0' && data[i] <= '9') && data[i] != ' ')
 			break;
 		else if (data[i] >= '0' && data[i] <= '9')
-		{
-			flag = 1;
-			buff[j] = data[i];
-			j++;
-		}
+			flag = 1, buff[j] = data[i], j++;
 		else if (flag == 1)
 			break;
 	}
 	if (flag == 0)
 	{
 		free(buff);
-		dprintf(STDERR_FILENO, USAGE_INT, line_number),
-			exit(EXIT_FAILURE);
+		dprintf(STDERR_FILENO, USAGE_INT, line_number), exit(EXIT_FAILURE);
 	}
 	num = atoi(buff);
 	node->n = num;
@@ -58,7 +52,6 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 		(*stack)->next = NULL;
 		return;
 	}
-
 	(*stack)->prev = node;
 	node->next = *stack;
 	node->prev = NULL;

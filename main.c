@@ -87,8 +87,10 @@ instruction_t get_func(char *func)
 		{"sub", sub_top},
 		{"div", div_top},
 		{"mul", mul_top},
+		{"mod", mod_top},
 		{"nop", no_op},
 		{"#", no_op},
+		{"pchar", p_char},
 		{NULL, NULL}
 	};
 
