@@ -40,7 +40,7 @@ void p_int(stack_t **stack, unsigned int line_number)
 {
 	(void)line_number;
 	if (!*stack || !stack)
-		dprintf(STDERR_FILENO, NO_PINT, line_number), free_stack(*stack), EXIT_F
+		dprintf(STDERR_FILENO, NO_PINT, line_number), free_stack(*stack), EXIT_F;
 
 	printf("%d\n", (*stack)->n);
 }
@@ -58,7 +58,7 @@ void pop_it(stack_t **stack, unsigned int line_number)
 	stack_t *node;
 
 	if (!stack || (!*stack))
-		dprintf(STDERR_FILENO, NO_POP, line_number), free_stack(*stack), EXIT_F
+		dprintf(STDERR_FILENO, NO_POP, line_number), free_stack(*stack), EXIT_F;
 	node = (*stack)->next;
 
 	(*stack)->next = NULL;
