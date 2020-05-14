@@ -53,7 +53,6 @@ int main(int argc, char *argv[])
 				code.f(&head, linecount);
 			}
 		}
-		/*printf("linecount: %d, buff: %s", (int)linecount, buff);*/
 		linecount++;
 		i = 0;
 		free(buff);
@@ -92,6 +91,7 @@ instruction_t get_func(char *func)
 		{"nop", no_op},
 		{"#", no_op},
 		{"pchar", p_char},
+		{"rotl", rotl},
 		{NULL, NULL}
 	};
 
