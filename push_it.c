@@ -28,18 +28,23 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 		buff[i] = '\0';
 	if (!node || !buff)
 		dprintf(STDERR_FILENO, NOMEM), exit(EXIT_FAILURE);
-	for (i = 0, j = 0; data[i]; i++)
+	for (i = 0, j = 0; data[i] && data[i] != '\n'; i++)
 	{
-		if (!(data[i] >= '0' && data[i] <= '9') && data[i] != ' ')
+		if (((data[i] <= '0' || data[i] >= '9') && data[i] != '-')
+		    && data[i] != ' ')
+		{
+			flag = 2;
 			break;
-		else if (data[i] >= '0' && data[i] <= '9')
+		}
+		else if (data[i] == ' ' && flag == 1)
+			break;
+		else if ((data[i] >= '0' && data[i] <= '9') ||
+			 (data[i] == '-'))
 			flag = 1, buff[j] = data[i], j++;
-		else if (flag == 1)
-			break;
 	}
-	if (flag == 0)
-		free(buff), dprintf(STDERR_FILENO, U_INT, line_number), exit(EXIT_FAILURE);
-
+	if (flag == 0 || flag == 2)
+		free(buff), dprintf(STDERR_FILENO, U_INT, line_number),
+			exit(EXIT_FAILURE);
 	num = atoi(buff);
 	node->n = num, free(buff);
 	if (!*stack)

@@ -2,6 +2,8 @@
 
 /**
  * rotl - rotates the stack to the top
+ * @stack: The stack we're working in
+ * @line_number: The line number for error purposes
  *
  * Return: void
  */
