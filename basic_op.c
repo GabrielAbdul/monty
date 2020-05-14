@@ -40,11 +40,7 @@ void p_int(stack_t **stack, unsigned int line_number)
 {
 	(void)line_number;
 	if (!*stack || !stack)
-	{
-		dprintf(STDERR_FILENO, NO_PINT, line_number);
-		free_stack(*stack);
-		exit(EXIT_FAILURE);
-	}
+		dprintf(STDERR_FILENO, NO_PINT, line_number), free_stack(*stack), EXIT_F
 
 	printf("%d\n", (*stack)->n);
 }
@@ -62,12 +58,7 @@ void pop_it(stack_t **stack, unsigned int line_number)
 	stack_t *node;
 
 	if (!stack || (!*stack))
-	{
-		dprintf(STDERR_FILENO, NO_POP, line_number);
-		free_stack(*stack);
-		exit(EXIT_FAILURE);
-	}
-
+		dprintf(STDERR_FILENO, NO_POP, line_number), free_stack(*stack), EXIT_F
 	node = (*stack)->next;
 
 	(*stack)->next = NULL;
@@ -105,11 +96,7 @@ void swap_it(stack_t **stack, unsigned int line_number)
 	}
 	node = *stack;
 	if (count < 1)
-	{
-		dprintf(STDERR_FILENO, NO_SWAP, line_number);
-		free_stack(*stack);
-		exit(EXIT_FAILURE);
-	}
+		dprintf(STDERR_FILENO, NO_SWAP, line_number), free_stack(*stack), EXIT_F;
 
 	tmp = nother_node->next;
 	nother_node->next = node;
