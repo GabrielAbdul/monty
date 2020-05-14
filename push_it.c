@@ -30,14 +30,14 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 		dprintf(STDERR_FILENO, NOMEM), exit(EXIT_FAILURE);
 	for (i = 0, j = 0; data[i] && data[i] != '\n'; i++)
 	{
-		if (((data[i] <= '0' || data[i] >= '9') && data[i] != '-')
+		if (data[i] == ' ' && flag != 0)
+			break;
+		else if (((data[i] < '0' || data[i] > '9') && data[i] != '-')
 		    && data[i] != ' ')
 		{
 			flag = 2;
 			break;
 		}
-		else if (data[i] == ' ' && flag == 1)
-			break;
 		else if ((data[i] >= '0' && data[i] <= '9') ||
 			 (data[i] == '-'))
 			flag = 1, buff[j] = data[i], j++;
