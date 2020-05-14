@@ -1,6 +1,9 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+/* GLOBAL DEFINITIONS */
+#define EXIT_F ("exit(EXIT_FAILURE)")
+
 /*INCLUDES GO HERE*/
 #include <stdio.h>
 #include <stdlib.h>
@@ -52,4 +55,5 @@ void div_top(stack_t **stack, unsigned int line_number);
 void mod_top(stack_t **stack, unsigned int line_number);
 void p_char(stack_t **stack, unsigned int line_number);
 void no_op(stack_t **stack, unsigned int line_number);
+void free_stack(stack_t *stack);
 #endif

@@ -1,8 +1,9 @@
 #include "monty.h"
 #include <string.h>
 
-#define USAGE_INT ("L%u: usage: push integer\n")
+#define U_INT ("L%u: usage: push integer\n")
 #define NOMEM ("Error: malloc failed\n")
+
 /**
  * push_it - pushes an element to the syack
  *
@@ -17,12 +18,11 @@
 void push_it(stack_t **stack, unsigned int line_number, char *data)
 {
 	stack_t *node = malloc(sizeof(stack_t));
-	int num, flag = 0, i, j;
+	int num = 0, flag = 0, i, j;
 	char *buff;
 
 	if (!stack || !data || data[0] == '\0')
-		dprintf(STDERR_FILENO, USAGE_INT, line_number),
-			exit(EXIT_FAILURE);
+		dprintf(STDERR_FILENO, U_INT, line_number), exit(EXIT_FAILURE);
 	buff = malloc(strlen(data) + 1);
 	for (i = 0; i < (int)strlen(data) + 1; i++)
 		buff[i] = '\0';
@@ -38,22 +38,16 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 			break;
 	}
 	if (flag == 0)
-	{
-		free(buff);
-		dprintf(STDERR_FILENO, USAGE_INT, line_number), exit(EXIT_FAILURE);
-	}
+		free(buff), dprintf(STDERR_FILENO, U_INT, line_number), exit(EXIT_FAILURE);
+
 	num = atoi(buff);
-	node->n = num;
-	free(buff);
+	node->n = num, free(buff);
 	if (!*stack)
 	{
 		*stack = node;
-		(*stack)->prev = NULL;
-		(*stack)->next = NULL;
+		(*stack)->prev = NULL, (*stack)->next = NULL;
 		return;
 	}
-	(*stack)->prev = node;
-	node->next = *stack;
-	node->prev = NULL;
-	*stack = node;
+	(*stack)->prev = node, node->next = *stack;
+	node->prev = NULL, *stack = node;
 }
