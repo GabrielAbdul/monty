@@ -41,11 +41,11 @@ int main(int argc, char *argv[])
 			i++;
 		if (*(buff + i) != '\n' && *(buff + i) && strlen(buff) >= 4)
 		{
-			if (!strncmp(buff, "push", 4))
-				push_it(&head, linecount, buff + 5);
+			if (!strncmp(buff + i, "push ", 5))
+				push_it(&head, linecount, buff + 5 + i);
 			else
 			{
-				code = get_func(buff);
+				code = get_func(buff + i);
 				if (code.opcode == NULL)
 				{
 					flag = -1;
@@ -98,7 +98,7 @@ instruction_t get_func(char *func)
 
 	for (i = 0; op[i].opcode != NULL; i++)
 	{
-		if (!strncmp(op[i].opcode, func, strlen(op[i].opcode) - 1))
+		if (!strncmp(op[i].opcode, func, strlen(op[i].opcode)))
 			return (op[i]);
 	}
 	return (op[i]);
