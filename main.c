@@ -24,12 +24,16 @@ int main(int argc, char *argv[])
 	int flag = 0;
 
 	if (argc != 2)
-		dprintf(STDERR_FILENO, USAGE), exit(EXIT_FAILURE);
+		dprintf(STDERR_FILENO, USAGE), EXIT_F;
 	if (access(argv[1], R_OK) < 0)
-		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), exit(EXIT_FAILURE);
+		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), EXIT_F;
 	fd = fopen(argv[1], "r");
 	if (fd == NULL)
-		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), exit(EXIT_FAILURE);
+		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), EXIT_F;
+
+	if (fdopen(fd, "r") == NULL)
+		dprintf(STDERR_FILENO, NOMEM), EXIT_F;
+
 	while (getline(&buff, &n, fd) != EOF)
 	{
 		if (!buff)
