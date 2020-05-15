@@ -37,7 +37,6 @@ void p_char(stack_t **stack, unsigned int line_number)
 void p_str(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node;
-	int i = 0;
 
 	(void)line_number;
 	if (!stack || (!*stack))
@@ -45,12 +44,13 @@ void p_str(stack_t **stack, unsigned int line_number)
 
 	node = *stack;
 
-	i = 0;
-	while (node->next && (node->n > 0 && node->n <= 127))
+	while (node)
 	{
-		putchar(node->n);
+		if (node->n >= 0 && node->n <= 127)
+			putchar(node->n);
+		else if (node->n < 0 || node->n > 127)
+			break;
 		node = node->next;
-		i++;
 	}
 	putchar('\n');
 }
