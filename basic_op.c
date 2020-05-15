@@ -84,7 +84,7 @@ void swap_it(stack_t **stack, unsigned int line_number)
 	if (!stack || !*stack)
 	{
 		dprintf(STDERR_FILENO, NO_SWAP, line_number);
-		free_stack(*stack);
+		free_stack(*stack), EXIT_F;
 	}
 
 	node = *stack;
@@ -104,7 +104,8 @@ void swap_it(stack_t **stack, unsigned int line_number)
 	nother_node->prev = NULL;
 	node->prev = nother_node;
 	node->next = tmp;
-	tmp->prev = node;
+	if (tmp)
+		tmp->prev = node;
 	*stack = nother_node;
 }
 
