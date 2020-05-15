@@ -16,13 +16,21 @@ void p_char(stack_t **stack, unsigned int line_number)
 	int ascii_value;
 
 	if (!stack || (!*stack))
+	{
+		free((FILE *)to_free[0]);
+		free((char *)to_free[1]);
 		dprintf(STDERR_FILENO, NO_PCHAR, line_number), free_stack(*stack), EXIT_F;
+	}
 	ascii_value = (*stack)->n;
 
 	if (ascii_value >= 0 && ascii_value  <= 127)
 		printf("%c\n", ascii_value);
 	else
+	{
+		free((FILE *)to_free[0]);
+		free((char *)to_free[1]);
 		dprintf(STDERR_FILENO, NO_VAL, line_number), EXIT_F;
+	}
 }
 
 /**
