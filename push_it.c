@@ -27,10 +27,8 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 	for (i = 0; i < (int)strlen(data) + 1; i++)
 		buff[i] = '\0';
 	if (!node || !buff)
-	{
-		fclose((FILE *)to_free[0]), free((char *)to_free[1]);
-		dprintf(STDERR_FILENO, NOMEM), exit(EXIT_FAILURE);
-	}
+		fclose((FILE *)to_free[0]), free((char *)to_free[1]),
+			dprintf(STDERR_FILENO, NOMEM), exit(EXIT_FAILURE);
 	for (i = 0, j = 0; data[i] && data[i] != '\n'; i++)
 	{
 		if (data[i] == ' ' && flag != 0)
@@ -45,22 +43,18 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 			if (flag == 0)
 				buff[j++] = data[i];
 			else
-				flag = 2;
-		}
+				flag = 2; }
 		if (flag == 2)
-			break;
-	}
+			break; }
 	if (flag == 0 || flag == 2)
-	{
-		fclose((FILE *)to_free[0]), free((char *)to_free[1]);
-		free(buff), dprintf(STDERR_FILENO, U_INT, line_number), EXIT_F;
-	}
+		fclose((FILE *)to_free[0]), free(to_free[1]), free(buff),
+			dprintf(STDERR_FILENO, U_INT, line_number), EXIT_F;
 	num = atoi(buff), node->n = num, free(buff);
 	if (!*stack)
 	{
 		*stack = node, (*stack)->prev = NULL, (*stack)->next = NULL;
 		return;
 	}
-	(*stack)->prev = node, node->next = *stack;
-	node->prev = NULL, *stack = node;
+	(*stack)->prev = node, node->next = *stack,
+		node->prev = NULL, *stack = node;
 }
