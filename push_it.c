@@ -24,6 +24,8 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 	if (!stack || !data || data[0] == '\0')
 		dprintf(STDERR_FILENO, U_INT, line_number), exit(EXIT_FAILURE);
 	buff = malloc(strlen(data) + 1);
+	for (i = 0; i < (int)strlen(data) + 1; i++)
+		buff[i] = '\0';
 	if (!node || !buff)
 		dprintf(STDERR_FILENO, NOMEM), exit(EXIT_FAILURE);
 	for (i = 0, j = 0; data[i] && data[i] != '\n'; i++)
@@ -47,12 +49,10 @@ void push_it(stack_t **stack, unsigned int line_number, char *data)
 	}
 	if (flag == 0 || flag == 2)
 		free(buff), dprintf(STDERR_FILENO, U_INT, line_number), EXIT_F;
-	num = atoi(buff);
-	node->n = num, free(buff);
+	num = atoi(buff), node->n = num, free(buff);
 	if (!*stack)
 	{
-		*stack = node;
-		(*stack)->prev = NULL, (*stack)->next = NULL;
+		*stack = node, (*stack)->prev = NULL, (*stack)->next = NULL;
 		return;
 	}
 	(*stack)->prev = node, node->next = *stack;
