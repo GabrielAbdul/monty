@@ -16,22 +16,19 @@ instruction_t get_func(char *func);
  */
 int main(int argc, char *argv[])
 {
-	int fd;
+	int fd, flag = 0;
 	size_t n = 0, linecount = 1, i = 0;
 	char *buff = NULL;
 	stack_t *head = NULL;
 	instruction_t code;
-	int flag = 0;
 
 	if (argc != 2)
 		dprintf(STDERR_FILENO, USAGE), EXIT_F;
-	if (access(argv[1], R_OK) < 0)
-		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), EXIT_F;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == NULL)
 		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), EXIT_F;
 
-	if (fdopen(fd, "r") == NULL)
+	if (fd = fdopen(fd, "r") == NULL)
 		dprintf(STDERR_FILENO, NOMEM), EXIT_F;
 
 	while (getline(&buff, &n, fd) != EOF)
