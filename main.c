@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 		}
 		while (buff[i] == ' ')
 			i++;
-		if (*(buff + i) != '\n' && *(buff + i) && strlen(buff) >= 4)
+		if (*(buff + i) != '\n' && *(buff + i))
 		{
 			if (!strncmp(buff + i, "push", 4))
 				push_it(&head, linecount, buff + 5 + i);
