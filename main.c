@@ -16,7 +16,7 @@ instruction_t get_func(char *func);
  */
 int main(int argc, char *argv[])
 {
-	FILE *fd;
+	int fd;
 	size_t n = 0, linecount = 1, i = 0;
 	char *buff = NULL;
 	stack_t *head = NULL;
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, USAGE), EXIT_F;
 	if (access(argv[1], R_OK) < 0)
 		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), EXIT_F;
-	fd = fopen(argv[1], "r");
+	fd = open(argv[1], O_RDONLY);
 	if (fd == NULL)
 		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), EXIT_F;
 
