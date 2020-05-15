@@ -2,6 +2,7 @@
 
 #define NO_PCHAR ("L%d: can't pchar, stack empty\n")
 #define NO_VAL ("L%d: can't pchar, value out of range\n")
+
 /**
  * p_char - prints the char at the top of the stack
  *
@@ -35,8 +36,8 @@ void p_char(stack_t **stack, unsigned int line_number)
  */
 void p_str(stack_t **stack, unsigned int line_number)
 {
-	int ascii_value;
 	stack_t *node;
+	int i = 0;
 
 	(void)line_number;
 	if (!stack || (!*stack))
@@ -44,13 +45,12 @@ void p_str(stack_t **stack, unsigned int line_number)
 
 	node = *stack;
 
-	while (node->next)
+	i = 0;
+	while (node->next && (node->n > 0 && node->n <= 127))
 	{
-		ascii_value = node->n;
-		if (ascii_value < 0 || ascii_value == 0 || ascii_value > 127)
-			break;
-		printf("%c", ascii_value);
+		putchar(node->n);
 		node = node->next;
+		i++;
 	}
 	putchar('\n');
 }
