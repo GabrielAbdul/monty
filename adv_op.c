@@ -17,9 +17,9 @@ void p_char(stack_t **stack, unsigned int line_number)
 
 	if (!stack || (!*stack))
 	{
-		dprintf(STDERR_FILENO, NO_PCHAR, line_number), free_stack(*stack), EXIT_F;
 		free((FILE *)to_free[0]);
 		free((char *)to_free[1]);
+		dprintf(STDERR_FILENO, NO_PCHAR, line_number), free_stack(*stack), EXIT_F;
 	}
 	ascii_value = (*stack)->n;
 
@@ -27,9 +27,9 @@ void p_char(stack_t **stack, unsigned int line_number)
 		printf("%c\n", ascii_value);
 	else
 	{
-		dprintf(STDERR_FILENO, NO_VAL, line_number), EXIT_F;
 		free((FILE *)to_free[0]);
 		free((char *)to_free[1]);
+		dprintf(STDERR_FILENO, NO_VAL, line_number), EXIT_F;
 	}
 }
 

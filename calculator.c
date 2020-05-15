@@ -23,9 +23,9 @@ void add_top(stack_t **stack, unsigned int line_number)
 
 	if (!stack || !*stack)
 	{
-		dprintf(STDERR_FILENO, NO_ADD, line_number), free_stack(*stack), EXIT_F;
 		free((FILE *)to_free[0]);
 		free((char *)to_free[1]);
+		dprintf(STDERR_FILENO, NO_ADD, line_number), free_stack(*stack), EXIT_F;
 	}
 
 	node = *stack;
@@ -38,9 +38,9 @@ void add_top(stack_t **stack, unsigned int line_number)
 
 	if (count < 1)
 	{
-		dprintf(STDERR_FILENO, NO_ADD, line_number), free_stack(*stack), EXIT_F;
 		free((FILE *)to_free[0]);
 		free((char *)to_free[1]);
+		dprintf(STDERR_FILENO, NO_ADD, line_number), free_stack(*stack), EXIT_F;
 	}
 
 	(*stack)->next->n += (*stack)->n;
@@ -65,9 +65,9 @@ void sub_top(stack_t **stack, unsigned int line_number)
 
 	if (!stack || !*stack)
 	{
-		dprintf(STDERR_FILENO, NO_SUB, line_number), free_stack(*stack), EXIT_F;
 		free((FILE *)to_free[0]);
 		free((char *)to_free[1]);
+		dprintf(STDERR_FILENO, NO_SUB, line_number), free_stack(*stack), EXIT_F;
 
 	}
 
@@ -81,9 +81,9 @@ void sub_top(stack_t **stack, unsigned int line_number)
 
 	if (count < 1)
 	{
-		dprintf(STDERR_FILENO, NO_SUB, line_number), free_stack(*stack), EXIT_F;
 		free((FILE *)to_free[0]);
 		free((char *)to_free[1]);
+		dprintf(STDERR_FILENO, NO_SUB, line_number), free_stack(*stack), EXIT_F;
 	}
 	(*stack)->next->n -= (*stack)->n;
 
@@ -108,9 +108,9 @@ void div_top(stack_t **stack, unsigned int line_number)
 
 	if (!stack || !*stack)
 	{
-		dprintf(STDERR_FILENO, NO_DIV, line_number), free_stack(*stack), EXIT_F;
 		free((FILE *)to_free[0]);
 		free((char *)to_free[1]);
+		dprintf(STDERR_FILENO, NO_DIV, line_number), free_stack(*stack), EXIT_F;
 	}
 
 
@@ -124,9 +124,9 @@ void div_top(stack_t **stack, unsigned int line_number)
 
 	if (count < 1)
 	{
-		dprintf(STDERR_FILENO, NO_DIV, line_number), free_stack(*stack), EXIT_F;
 		free((FILE *)to_free[0]);
 		free((char *)to_free[1]);
+		dprintf(STDERR_FILENO, NO_DIV, line_number), free_stack(*stack), EXIT_F;
 
 	}
 
@@ -153,9 +153,9 @@ void mul_top(stack_t **stack, unsigned int line_number)
 
 	if (!stack || !*stack)
 	{
-		dprintf(STDERR_FILENO, NO_MUL, line_number), free_stack(*stack), EXIT_F;
 		free((FILE *)to_free[0]);
 		free((char *)to_free[1]);
+		dprintf(STDERR_FILENO, NO_MUL, line_number), free_stack(*stack), EXIT_F;
 
 	}
 
@@ -170,9 +170,9 @@ void mul_top(stack_t **stack, unsigned int line_number)
 
 	if (count < 1)
 	{
-		dprintf(STDERR_FILENO, NO_MUL, line_number), free_stack(*stack), EXIT_F;
 		free((FILE *)to_free[0]);
 		free((char *)to_free[1]);
+		dprintf(STDERR_FILENO, NO_MUL, line_number), free_stack(*stack), EXIT_F;
 	}
 
 	(*stack)->next->n *= (*stack)->n;
@@ -198,17 +198,17 @@ void mod_top(stack_t **stack, unsigned int line_number)
 
 	if (!stack || !*stack)
 	{
-		dprintf(STDERR_FILENO, NO_MOD, line_number), free_stack(*stack), EXIT_F;
 		free((FILE *)to_free[0]);
 		free((char *)to_free[1]);
+		dprintf(STDERR_FILENO, NO_MOD, line_number), free_stack(*stack), EXIT_F;
 
 	}
 
 	if ((*stack)->n == 0)
 	{
-		dprintf(STDERR_FILENO, DIV_0, line_number), free_stack(*stack), EXIT_F;
 		free((FILE *)to_free[0]);
 		free((char *)to_free[1]);
+		dprintf(STDERR_FILENO, DIV_0, line_number), free_stack(*stack), EXIT_F;
 
 	}
 
