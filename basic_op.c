@@ -41,8 +41,11 @@ void p_int(stack_t **stack, unsigned int line_number)
 {
 	(void)line_number;
 	if (!*stack || !stack)
+	{
+		fclose((FILE *)to_free[0]);
+		free(to_free[1]);
 		dprintf(STDERR_FILENO, NO_PINT, line_number), free_stack(*stack), EXIT_F;
-
+	}
 	printf("%d\n", (*stack)->n);
 }
 /**
@@ -59,7 +62,11 @@ void pop_it(stack_t **stack, unsigned int line_number)
 	stack_t *node;
 
 	if (!stack || (!*stack))
+	{
+		fclose((FILE *)to_free[0]);
+		free((char *)to_free[1]);
 		dprintf(STDERR_FILENO, NO_POP, line_number), free_stack(*stack), EXIT_F;
+	}
 	node = (*stack)->next;
 
 	(*stack)->next = NULL;
