@@ -85,6 +85,8 @@ void swap_it(stack_t **stack, unsigned int line_number)
 	{
 		dprintf(STDERR_FILENO, NO_SWAP, line_number);
 		free_stack(*stack), EXIT_F;
+		fclose((FILE *)to_free[0]);
+		free((char *)to_free[1]);
 	}
 
 	node = *stack;
@@ -96,9 +98,12 @@ void swap_it(stack_t **stack, unsigned int line_number)
 		count++;
 	}
 	node = *stack;
-	if (count < 1)
+	if (count <= 1)
+	{
+		fclose((FILE *)to_free[0]);
+		free((char *)to_free[1]);
 		dprintf(STDERR_FILENO, NO_SWAP, line_number), free_stack(*stack), EXIT_F;
-
+	}
 	tmp = nother_node->next;
 	nother_node->next = node;
 	nother_node->prev = NULL;

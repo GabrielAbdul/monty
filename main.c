@@ -7,6 +7,7 @@
 #define UNKNOWN ("L%d: unknown instruction %s\n")
 int _strcmp(char *s1, char *s2);
 instruction_t get_func(char *func);
+void *to_free[2];
 /**
  * main - Entrypoint for the monty interpreter function
  * @argc: argument count
@@ -32,7 +33,7 @@ int main(int argc, char *argv[])
 	fp = fdopen(fd, "r");
 	if (fp == NULL)
 		dprintf(STDERR_FILENO, NOMEM), EXIT_F;
-
+	to_free[0] = (void *)fp;
 	while (getline(&buff, &n, fp) != EOF)
 	{
 		if (!buff)
@@ -40,6 +41,7 @@ int main(int argc, char *argv[])
 			dprintf(STDERR_FILENO, NOMEM);
 			break;
 		}
+		to_free[1] = buff;
 		while (buff[i] == ' ')
 			i++;
 		if (*(buff + i) != '\n' && *(buff + i))
@@ -53,6 +55,7 @@ int main(int argc, char *argv[])
 					     buff[i + j] != '\n'; j++)
 					tmp[j] = buff[i + j];
 				tmp[j] = '\0', free(buff), buff = tmp;
+				to_free[1] = buff;
 				code = get_func(buff);
 				if (code.opcode == NULL)
 				{

@@ -42,6 +42,9 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/*Global Var(s)*/
+extern void *to_free[2];
+
 /*PROTOTYPES*/
 void push_it(stack_t **stack, unsigned int line_number, char *data);
 void p_int(stack_t **stack, unsigned int line_number);
