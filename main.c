@@ -16,6 +16,7 @@ instruction_t get_func(char *func);
  */
 int main(int argc, char *argv[])
 {
+	FILE *fp;
 	int fd, flag = 0;
 	size_t n = 0, linecount = 1, i = 0;
 	char *buff = NULL;
@@ -25,13 +26,14 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 		dprintf(STDERR_FILENO, USAGE), EXIT_F;
 	fd = open(argv[1], O_RDONLY);
-	if (fd == NULL)
+	if (fd < 0)
 		dprintf(STDERR_FILENO, FAILOPEN, argv[1]), EXIT_F;
 
-	if (fd = fdopen(fd, "r") == NULL)
+	fp = fdopen(fd, "r");
+	if (fp == NULL)
 		dprintf(STDERR_FILENO, NOMEM), EXIT_F;
 
-	while (getline(&buff, &n, fd) != EOF)
+	while (getline(&buff, &n, fp) != EOF)
 	{
 		if (!buff)
 		{
@@ -66,7 +68,7 @@ int main(int argc, char *argv[])
 	free_stack(head);
 	if (buff)
 		free(buff);
-	fclose(fd);
+	fclose(fp);
 	if (flag == -1)
 		return (EXIT_FAILURE);
 	else

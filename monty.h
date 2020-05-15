@@ -2,7 +2,7 @@
 #define MONTY_H
 
 /* GLOBAL DEFINITIONS */
-#define EXIT_F ("exit(EXIT_FAILURE)")
+#define EXIT_F (exit(EXIT_FAILURE))
 
 /*INCLUDES GO HERE*/
 #include <stdio.h>
