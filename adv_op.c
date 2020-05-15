@@ -37,7 +37,6 @@ void p_char(stack_t **stack, unsigned int line_number)
 void p_str(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node;
-	char *buff = malloc(sizeof(char *) * 8);
 	int i = 0;
 
 	(void)line_number;
