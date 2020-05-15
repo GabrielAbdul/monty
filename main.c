@@ -100,7 +100,7 @@ instruction_t get_func(char *func)
 		{"pchar", p_char},
 		{"rotl", rotl},
 		{"rotr", rotr},
-		{"stack", nop},/*default program, just to prevent errors*/
+		{"stack", no_op},/*default program, just to prevent errors*/
 		{NULL, NULL}
 	};
 
