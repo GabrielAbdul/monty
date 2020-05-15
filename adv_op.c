@@ -2,7 +2,6 @@
 
 #define NO_PCHAR ("L%d: can't pchar, stack empty\n")
 #define NO_VAL ("L%d: can't pchar, value out of range\n")
-#define EXIT_F ("exit(EXIT_FAILURE)")
 /**
  * p_char - prints the char at the top of the stack
  *
